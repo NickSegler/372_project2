@@ -12,9 +12,9 @@ int main(){
     double y;
     double x1;
     double y1;
-    cout << "Rectangle X: ";
+    cout << "Rectangle W: ";
     cin >> x;
-    cout << "Rectangle Y: ";
+    cout << "Rectangle H: ";
     cin >> y;
     cout << "Center" << endl;
     cout << "X: ";
