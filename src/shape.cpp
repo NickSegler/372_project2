@@ -21,11 +21,11 @@ string Rectangle::draw(const pair<double, double> & coord, bool to_file){
     string output = "% ! \n";
     output += "0 0\n";
     output += "newpath \n";
-    output += std::to_string(coord.first);
+    output += std::to_string(coord.first - (width_/2));
     output += " ";
-    output += std::to_string(coord.second);
+    output += std::to_string(coord.second - (height_/2));
     output += " translate \n";
-    output += "moveto \n"
+    output += "moveto \n";
     output += std::to_string(b_box.bleft.first);
     output += " ";
     output += std::to_string(b_box.bleft.second);

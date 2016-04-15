@@ -58,7 +58,7 @@ protected:
 //      b_box.x == width
 class Rectangle : public B_shape{
 public:
-    Rectangle(int y, int x):height_(y), width_(x){
+    Rectangle(int x, int y):height_(y), width_(x){
         b_box.bright = make_pair(x, 0);
         b_box.tright = make_pair(x, y);
         b_box.tleft  = make_pair(0, y);
@@ -80,7 +80,7 @@ protected:
 // Everything else is the same as Rectangle
 class Spacer : public Rectangle{
     public:
-    Spacer(int y, int x):Rectangle(y, x)
+    Spacer(int x, int y):Rectangle(x, y)
     {}
     string draw(const pair<double, double> & coord, bool to_file);
 protected:
