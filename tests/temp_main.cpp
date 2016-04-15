@@ -1,4 +1,4 @@
-#include "shape.h"
+#include "../src/shape.h"
 #include <iostream>
 using std::cout;
 using std::endl;
