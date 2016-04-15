@@ -4,8 +4,13 @@
 // Spring 2016
 // Heart Break Gorillas
 
+#ifndef SHAPE_H_INCLUDED
+#define SHAPE_H_INCLUDED
+
 #include <string>
 using std::string;
+#include <utility>
+using std::pair;
 
 // Shape
 // Virtual class that all others are derived from
@@ -17,7 +22,7 @@ class Shape{
 public:
     ~Shape()
     {}
-    virtual  string draw(double coord, bool to_file) = 0;
+    virtual  string draw(const pair<double, double> & coord, bool to_file) = 0;
 };
 
 // B_shape
@@ -30,7 +35,7 @@ public:
 //      this should be never used for anything
 class B_shape : public Shape{
 public:
-    virtual string draw(double coord, bool to_file) = 0;
+    virtual string draw(const pair<double, double> & coord, bool to_file) = 0;
 protected:
     struct bounding_box{
         double x;
@@ -60,7 +65,7 @@ public:
     // draw
     // takes point for center
     // bool decides if postscript code get written or returned
-    virtual string draw(double coord, bool to_file);
+    virtual string draw(const pair<double, double> & coord, bool to_file);
 protected:
     struct bounding_box{
         double x;
@@ -80,7 +85,7 @@ class Spacer : public Rectangle{
     public:
     Spacer(int y, int x):Rectangle(y, x)
     {}
-    string draw(double coord, bool to_file);
+    string draw(const pair<double, double> & coord, bool to_file);
 protected:
     struct bounding_box{
         double x;
@@ -91,3 +96,5 @@ protected:
     double height_;
     double width_;
 };
+
+#endif
