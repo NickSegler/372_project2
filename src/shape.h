@@ -60,7 +60,6 @@ public:
     // draw
     // takes point for center
     // bool decides if postscript code get written or returned
-    // 
     virtual string draw(double coord, bool to_file);
 protected:
     struct bounding_box{
