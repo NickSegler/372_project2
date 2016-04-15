@@ -25,13 +25,13 @@ string Rectangle::draw(const pair<double, double> & coord, bool to_file){
     output += " ";
     output += std::to_string(coord.second);
     output += " moveto \n";
-    output += std::to_string(b_box.left.first);
+    output += std::to_string(b_box.bleft.first);
     output += " ";
-    output += std::to_string(b_box.left.second);
+    output += std::to_string(b_box.bleft.second);
     output += " lineto \n";
-    output += std::to_string(b_box.right.first);
+    output += std::to_string(b_box.bright.first);
     output += " ";
-    output += std::to_string(b_box.right.second);
+    output += std::to_string(b_box.bright.second);
     output += " lineto \n";
     output += std::to_string(b_box.tright.first);
     output += " ";
