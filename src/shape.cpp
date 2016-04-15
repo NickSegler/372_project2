@@ -18,21 +18,28 @@ using std::pair;
 
 
 string Rectangle::draw(const pair<double, double> & coord, bool to_file){
-    string output = "";
+    string output = "% ! \n";
     output += "0 0\n";
     output += "newpath \n";
-    output += "moveto \n";
-    output += std::to_string(coord.first - (b_box.x / 2));
+    output += std::to_string(coord.first);
     output += " ";
-    output += std::to_string(coord.second - (b_box.y / 2));
+    output += std::to_string(coord.second);
+    output += " moveto \n";
+    output += std::to_string(b_box.left.first);
+    output += " ";
+    output += std::to_string(b_box.left.second);
     output += " lineto \n";
-    output += std::to_string(coord.first + (b_box.x / 2));
+    output += std::to_string(b_box.right.first);
     output += " ";
-    output += std::to_string(coord.second - (b_box.y / 2));
+    output += std::to_string(b_box.right.second);
     output += " lineto \n";
-    output += std::to_string(coord.first + (b_box.x / 2));
+    output += std::to_string(b_box.tright.first);
     output += " ";
-    output += std::to_string(coord.second + (b_box.y / 2));
+    output += std::to_string(b_box.tright.second);
+    output += " lineto \n";
+    output += std::to_string(b_box.tleft.first);
+    output += " ";
+    output += std::to_string(b_box.tleft.second);
     output += " lineto \n";
     output += "closepath \n";
     

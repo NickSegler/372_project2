@@ -11,6 +11,7 @@
 using std::string;
 #include <utility>
 using std::pair;
+using std::make_pair;
 
 // Shape
 // Virtual class that all others are derived from
@@ -38,9 +39,10 @@ public:
     virtual string draw(const pair<double, double> & coord, bool to_file) = 0;
 protected:
     struct bounding_box{
-        double x;
-        double y;
-        double center;
+        pair<double, double> bleft = make_pair(0,0);
+        pair<double, double> bright;
+        pair<double, double> tright;
+        pair<double, double> tleft;
     };
 };
 
@@ -57,9 +59,9 @@ protected:
 class Rectangle : public B_shape{
 public:
     Rectangle(int y, int x):height_(y), width_(x){
-        b_box.x = x;
-        b_box.y = y;
-        b_box.center = (x/2) + (y/2);
+        b_box.bright = make_pair(x, 0);
+        b_box.tright = make_pair(x, y);
+        b_box.tleft  = make_pair(0, y);
     }
     
     // draw
@@ -67,11 +69,6 @@ public:
     // bool decides if postscript code get written or returned
     virtual string draw(const pair<double, double> & coord, bool to_file);
 protected:
-    struct bounding_box{
-        double x;
-        double y;
-        double center;
-    };
     bounding_box b_box;
     double height_;
     double width_;
@@ -87,11 +84,6 @@ class Spacer : public Rectangle{
     {}
     string draw(const pair<double, double> & coord, bool to_file);
 protected:
-    struct bounding_box{
-        double x;
-        double y;
-        double center;
-    };
     bounding_box b_box;
     double height_;
     double width_;
