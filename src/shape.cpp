@@ -38,8 +38,9 @@ string Rectangle::draw(double coord, bool to_file){
     corner -= b_box.x;
     output += std::to_string(corner);
     output += " lineto \n";
-    output += "closepath";
+    output += "closepath \n";
     
+    output += "stroke";
     if(!to_file)
         return output;
     else{
