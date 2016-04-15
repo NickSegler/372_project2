@@ -24,7 +24,8 @@ string Rectangle::draw(const pair<double, double> & coord, bool to_file){
     output += std::to_string(coord.first);
     output += " ";
     output += std::to_string(coord.second);
-    output += " moveto \n";
+    output += " translate \n";
+    output += "moveto \n"
     output += std::to_string(b_box.bleft.first);
     output += " ";
     output += std::to_string(b_box.bleft.second);
