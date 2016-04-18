@@ -21,8 +21,7 @@ using std::make_pair;
 //      this should be never used for anything
 class Shape{
 public:
-    ~Shape()
-    {}
+    virtual ~Shape() = default;
     virtual  string draw(const pair<double, double> & coord, bool to_file) = 0;
 };
 
