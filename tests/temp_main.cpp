@@ -25,5 +25,7 @@ int main(){
     pair<double, double> point = make_pair(x1, y1);
     test.draw(point, true);
     cout << test.draw(point, false) << endl;
+    Triangle test1(x,y);
+    cout << test1.draw(point, false) << endl;
     return 0;
 }

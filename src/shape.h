@@ -39,7 +39,6 @@ public:
     virtual string draw(const pair<double, double> & coord, bool to_file) = 0;
 protected:
     struct bounding_box{
-        pair<double, double> bleft = make_pair(0,0);
         pair<double, double> bright;
         pair<double, double> tright;
         pair<double, double> tleft;
@@ -82,6 +81,54 @@ class Spacer : public Rectangle{
     public:
     Spacer(int x, int y):Rectangle(x, y)
     {}
+    string draw(const pair<double, double> & coord, bool to_file);
+protected:
+    bounding_box b_box;
+    double height_;
+    double width_;
+};
+
+// Triangle
+// Derived from B_shape
+// default is equalateral Triangle (same as Polygon(3))
+//
+//    **INVARIANTS**
+//      height_ and width_ >= 0
+//      b_box.y == height_
+//      b_box.x == width
+class Triangle : public B_shape{
+public:
+    Triangle(int x, int y):height_(y), width_(x){
+        b_box.bright = make_pair(x, 0);
+        b_box.tright = make_pair(x, y);
+        b_box.tleft  = make_pair(0, y);
+    }
+    
+    // draw
+    // takes point for center
+    // bool decides if postscript code get written or returned
+    virtual string draw(const pair<double, double> & coord, bool to_file);
+protected:
+    bounding_box b_box;
+    double height_;
+    double width_;
+};
+
+// R_triangle
+// A right triangle derived from Triangle
+// assumes bottom left is 90 degree angle
+// ie: __
+//    |\ |
+//    |_\|
+//
+class R_triangle : public Triangle{
+public:
+    R_triangle(int x, int y):Triangle(x,y)
+    {}
+    
+    // draw
+    // takes point for center
+    // bool decides if postscript code get written or returned
     string draw(const pair<double, double> & coord, bool to_file);
 protected:
     bounding_box b_box;
