@@ -16,6 +16,9 @@ using std::runtime_error;
 #include <utility>
 using std::pair;
 
+// **************************
+// **** HELPER FUNCTIONS ****
+// **************************
 //this uses the formula provided
 pair<double,double> polygonPoint(double l, int n, int k)
 {
@@ -27,7 +30,7 @@ pair<double,double> polygonPoint(double l, int n, int k)
     return make_pair(x,y);
 }
 
-string head = "% ! \n0 0\nnewpath \n";
+string head = "% !\n0 0\nnewpath\n";
 
 string psTo(double x, double y, int t)
 {
@@ -39,16 +42,62 @@ string psTo(double x, double y, int t)
     
     if(t==0)
     {
-        rStr += " moveto \n";
+        rStr += " moveto\n";
     }else
     {
-        rStr += " lineto \n ";
+        rStr += " lineto\n";
     }
     
     
     return rStr;
 }
 
+
+// ******************************************
+// **** CONSTRUCTORS && MEMBER FUNCTIONS ****
+// ******************************************
+
+// Rectangle
+Rectangle::Rectangle(int x, int y){
+        b_box.bright = make_pair(x, 0);
+        b_box.tright = make_pair(x, y);
+        b_box.tleft  = make_pair(0, y);
+        
+        verts.push_back(make_pair(0,0));
+        verts.push_back(make_pair(0,y));
+        verts.push_back(make_pair(x,y));
+        verts.push_back(make_pair(x,0));
+}
+
+// Polygon
+Polygon::Polygon():sideLength_(10),numberSides_(4){
+    makeBBox();
+    makeVList();
+}
+
+Polygon::Polygon(double l, int n):sideLength_(l),numberSides_(n){
+    makeBBox();
+    makeVList();
+}
+
+Polygon::Polygon(double w, double h, int n):numberSides_(n){
+    if(n%2==0)
+    {
+        sideLength_ = sideL(h,numberSides_);
+    }else{
+        sideLength_ = sideL(w,numberSides_);
+    }
+    makeBBox();
+    makeVList();
+}
+
+void Polygon::scale(double x, double y){
+    for(int i=0; i<verts.size(); ++i)
+    {
+        verts[i].first = verts[i].first*x;
+        verts[i].second = verts[i].second*y;
+    }
+}
 //uses the inradius to find sidelength
 double Polygon::sideL(double r, int sides)
 {
@@ -88,6 +137,18 @@ void Polygon::makeBBox()
     }
 }
 
+// Triangle
+E_triangle::E_triangle(int x, int y):height_(y), width_(x){
+    b_box.bright = make_pair(x, 0);
+    b_box.tright = make_pair(x, y);
+    b_box.tleft  = make_pair(0, y);
+    
+    verts.push_back(make_pair(0,0));
+    verts.push_back(make_pair(0,y));
+    verts.push_back(make_pair(x,y));
+    verts.push_back(make_pair(x,0));
+}
+
 void Polygon::makeVList()
 {
     for(int i =0; i<numberSides_; ++i)
@@ -97,18 +158,23 @@ void Polygon::makeVList()
 }
 
 
+
+
+// ************************
+// **** DRAW FUNCTIONS ****
+// ************************
 string B_shape::draw(const pair<double, double> & coord, bool to_file)
 {
     string outStr;
     
-    outStr = "% ! \n";
+    outStr = "% !\n";
     outStr += "0 0\n";
-    outStr += "newpath \n";
-    outStr += "gsave \n";
+    outStr += "newpath\n";
+    outStr += "gsave\n";
     outStr += std::to_string(coord.first);
     outStr += " ";
     outStr += std::to_string(coord.second);
-    outStr += " translate \n";
+    outStr += " translate\n";
 
     
     for(int i =0; i<verts.size(); ++i)
@@ -116,9 +182,9 @@ string B_shape::draw(const pair<double, double> & coord, bool to_file)
         outStr += psTo(verts[i].first, verts[i].second, i);
     }
     
-    outStr += "closepath \n";
-    outStr += "stroke \n";
-    outStr += "grestore \n";
+    outStr += "closepath\n";
+    outStr += "stroke\n";
+    outStr += "grestore\n";
     
     if(!to_file)
         return outStr;
@@ -134,13 +200,13 @@ string B_shape::draw(const pair<double, double> & coord, bool to_file)
     }
 }
 
-string Triangle::draw(const pair<double, double> & coord, bool to_file){
+string E_triangle::draw(const pair<double, double> & coord, bool to_file){
     string output = head;
     output += std::to_string(coord.first - (width_/2));
     output += " ";
     output += std::to_string(coord.second - (height_/2));
-    output += " translate \n";
-    output += "moveto \n";
+    output += " translate\n";
+    output += "moveto\n";
     output += std::to_string(0);
     output += " ";
     output += std::to_string(0);
@@ -180,11 +246,11 @@ string Circle::draw(const pair<double, double> & coord, bool to_file)
     string outStr;
     
     outStr += head;
-    outStr += "gsave \n";
+    outStr += "gsave\n";
     outStr += std::to_string(coord.first);
     outStr += " ";
     outStr += std::to_string(coord.second);
-    outStr += " translate \n";
+    outStr += " translate\n";
     outStr += "0 0 ";
     outStr += std::to_string(radius_);
     outStr += " 0 360 arc\n";

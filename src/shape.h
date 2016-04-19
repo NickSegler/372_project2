@@ -69,21 +69,10 @@ protected:
 //      b_box.x == width
 class Rectangle : public B_shape{
 public:
-    Rectangle(int x, int y):height_(y), width_(x){
-        b_box.bright = make_pair(x, 0);
-        b_box.tright = make_pair(x, y);
-        b_box.tleft  = make_pair(0, y);
-        
-        verts.push_back(make_pair(0,0));
-        verts.push_back(make_pair(0,y));
-        verts.push_back(make_pair(x,y));
-        verts.push_back(make_pair(x,0));
-    }
+    Rectangle(int x, int y);
     
 protected:
     bounding_box b_box;
-    double height_;
-    double width_;
 };
 
 // Spacer
@@ -103,38 +92,13 @@ protected:
 
 class Polygon : public B_shape{
 public:
-    Polygon():sideLength_(10),numberSides_(4)
-    {
-        makeBBox();
-        makeVList();
-    }
+    Polygon();
     
-    Polygon(double l, int n):sideLength_(l),numberSides_(n)
-    {
-        makeBBox();
-        makeVList();
-    }
+    Polygon(double l, int n);
     
-    Polygon(double w, double h, int n):numberSides_(n)
-    {
-        if(n%2==0)
-        {
-            sideLength_ = sideL(h,numberSides_);
-        }else{
-            sideLength_ = sideL(w,numberSides_);
-        }
-        makeBBox();
-        makeVList();
-    }
+    Polygon(double w, double h, int n);
     
-    void scale(double x, double y)
-    {
-        for(int i=0; i<verts.size(); ++i)
-        {
-            verts[i].first = verts[i].first*x;
-            verts[i].second = verts[i].second*y;
-        }
-    }
+    void scale(double x, double y);
     
     void makeBBox();
     void makeVList();
@@ -224,14 +188,9 @@ protected:
 //      height_ and width_ >= 0
 //      b_box.y == height_
 //      b_box.x == width
-class Triangle : public B_shape{
+class E_triangle : public B_shape{
 public:
-    Triangle(int x, int y):height_(y), width_(x){
-        b_box.bright = make_pair(x, 0);
-        b_box.tright = make_pair(x, y);
-        b_box.tleft  = make_pair(0, y);
-        
-    }
+    E_triangle(int x, int y);
     
     // draw
     // takes point for center
@@ -246,14 +205,13 @@ protected:
 // R_triangle
 // A right triangle derived from Triangle
 // assumes bottom left is 90 degree angle
-// ie: __
+// ex: __
 //    |\ |
 //    |_\|
 //
-class R_triangle : public Triangle{
+class R_triangle : public B_shape{
 public:
-    R_triangle(int x, int y):Triangle(x,y)
-    {}
+    R_triangle(int x, int y);
     
     // draw
     // takes point for center
@@ -264,6 +222,8 @@ protected:
     double height_;
     double width_;
 };
+
+
 
 class Circle : public B_shape{
 public:
