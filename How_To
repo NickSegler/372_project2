@@ -1,18 +1,45 @@
 Shape Library
 
+        No info on stacks
+
+
 1. Creating shapes
   There are several different shapes that can be created using this library
     ● Circle
-        circle is not yet implemented
+        circles are created using the Circle class
+          Circle(double radius)
 
     ● Rectangle
         rectangles are created using the Rectangle class
           Rectangle(double Width, double Height)
 
     ● Regular Polygons
-        regular polygons are created using the Polygon class
+        regular polygons are created using the Polygon class (including squares and triangles)
           Polygon(double Side length, int Number of sides)
                               or
           Polygon(double Width, double Height, int Number of sides)
               - Width and Height should be the same size as the bounding box
-              
+
+        Square: a polygon of 4 sides
+
+        Equilateral triangle: a 3 sided polygon
+
+2. Modifying shapes
+  Rotating a shape
+    R_shape(B_shape * Rotate This, double Angle)
+      Rotate This needs to be a shape derived from a B_shape class
+
+      Angle is the degrees to rotate by
+
+  Scaling a shape
+    S_shape(B_shape * Scale This, double Scale X, double Scale Y)
+
+
+3. Drawing shapes
+  Drawing is simple using this library
+    the Draw function can be used the same way for all shapes
+
+    Draw(pair<double,double> Coords, bool To file)
+        using make_pair from #include<utility> is the best way to pass Coords
+        if To file is true the postscript code is saved to a file
+        the postscript code is also returned as a string for you to use as needed
