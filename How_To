@@ -1,0 +1,18 @@
+Shape Library
+
+1. Creating shapes
+  There are several different shapes that can be created using this library
+    ● Circle
+        circle is not yet implemented
+
+    ● Rectangle
+        rectangles are created using the Rectangle class
+          Rectangle(double Width, double Height)
+
+    ● Regular Polygons
+        regular polygons are created using the Polygon class
+          Polygon(double Side length, int Number of sides)
+                              or
+          Polygon(double Width, double Height, int Number of sides)
+              - Width and Height should be the same size as the bounding box
+              
