@@ -27,6 +27,8 @@ pair<double,double> polygonPoint(double l, int n, int k)
     return make_pair(x,y);
 }
 
+string head = "% ! \n0 0\nnewpath \n";
+
 string psTo(double x, double y, int t)
 {
     string rStr;
@@ -133,9 +135,7 @@ string B_shape::draw(const pair<double, double> & coord, bool to_file)
 }
 
 string Triangle::draw(const pair<double, double> & coord, bool to_file){
-    string output = "";
-    output += "0 0\n";
-    output += "newpath \n";
+    string output = head;
     output += std::to_string(coord.first - (width_/2));
     output += " ";
     output += std::to_string(coord.second - (height_/2));
@@ -173,4 +173,26 @@ string Triangle::draw(const pair<double, double> & coord, bool to_file){
         write.close();
         return "";
     }
+}
+
+string Circle::draw(const pair<double, double> & coord, bool to_file)
+{
+    string outStr;
+    
+    outStr += head;
+    outStr += "gsave \n";
+    outStr += std::to_string(coord.first);
+    outStr += " ";
+    outStr += std::to_string(coord.second);
+    outStr += " translate \n";
+    outStr += "0 0 ";
+    outStr += std::to_string(radius_);
+    outStr += " 0 360 arc\n";
+    outStr += "closepath \n";
+    outStr += "stroke\n";
+    outStr += "grestore\n";
+    
+    
+    
+    return outStr;
 }

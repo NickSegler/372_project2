@@ -14,6 +14,11 @@ TEST_CASE("Testing Shape"){
 TEST_CASE("Testing B_Shapes"){
     SECTION("Tesing Rectangle"){
         Rectangle test(300, 400);
+        
+        
+        Circle bob(10);
+        
+        std::cout << bob.draw(make_pair(100,100), false);
 
         string output = "0 0\nnewpath \n50.000000 -100.000000 translate \nmoveto \n0 0 lineto \n300.000000 0.000000 lineto \n300.000000 400.000000 lineto \n0.000000 400.000000 lineto \nclosepath \nstroke";
 

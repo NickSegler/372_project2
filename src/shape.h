@@ -205,7 +205,6 @@ public:
         
         int rLoc = outStr.find("translate \n") + 11; //12 is the size of the searched string
         
-        
         outStr.insert(rLoc, add);
         
         return outStr;
@@ -231,6 +230,7 @@ public:
         b_box.bright = make_pair(x, 0);
         b_box.tright = make_pair(x, y);
         b_box.tleft  = make_pair(0, y);
+        
     }
     
     // draw
@@ -263,6 +263,16 @@ protected:
     bounding_box b_box;
     double height_;
     double width_;
+};
+
+class Circle : public B_shape{
+public:
+    Circle(double r):radius_(r)
+    {}
+    
+    virtual string draw(const pair<double, double> & coord, bool to_file);
+protected:
+    double radius_;
 };
 
 #endif
