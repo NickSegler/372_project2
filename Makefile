@@ -1,9 +1,9 @@
 all: tests
 
 #Tests
-temp: tests/temp_main.cpp
-	g++ -std=c++11 src/shape.cpp src/shape.h tests/temp_main.cpp -o hb_temp_test
+test: tests/shape_tests.cpp
+	g++ -std=c++11 src/shape.cpp src/shape.h tests/shape_tests.cpp tests/catch.hpp -o hbg_shape_test
 	
 #cleanup
 clean:
-	rm hb_* *.ps
+	rm hbg_* *.ps
