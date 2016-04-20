@@ -233,11 +233,60 @@ protected:
 class Circle : public B_shape{
 public:
     Circle(double r):radius_(r)
-    {}
+    {
+        verts.push_back(make_pair(0,0));
+        verts.push_back(make_pair(radius_, radius_));
+    }
     
     virtual string draw(const pair<double, double> & coord, bool to_file);
 protected:
     double radius_;
 };
+
+// ****************
+// **** STACKS ****
+// ****************
+class Stack : public Shape {
+
+public:
+
+    virtual string draw(const pair<double, double> & coord, bool to_file) = 0;
+
+    void addShape(B_shape * bsp)
+    {  theStack.push_back(bsp);    }
+
+protected:
+    vector <B_shape*> theStack;
+};
+
+class H_stack : public Stack {
+
+public:
+
+    string draw(const pair<double, double> & coord, bool to_file);
+
+protected:
+    double center;
+};
+
+class V_stack : public Stack {
+
+public:
+
+    string draw(const pair<double, double> & coord, bool to_file);
+
+    pair<double,double> findGreatest(B_shape * bsp);
+
+    double findHeight(B_shape *bsp);
+
+    double findWidth(B_shape *bsp);
+
+protected:
+    double center;
+};
+
+// ****************
+// **** STACKS ****
+// ****************
 
 #endif
