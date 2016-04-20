@@ -120,8 +120,21 @@ int main(){
     
     // Scaling shapes
     // We follow a similar procedure as rotating a shape to scale a shape
-    // 
-
-
+    
+    // 3 Parameter Constructor
+    // As before, the first parameter is the adress of the shape we want to scale
+    // the following two are the scale for X and Y respectively
+    S_shape scaled_pent(&pent, 1, 3);
+    
+    // This makes a scaled shape that is 1 * the previous width of pent
+    // and 3 * the previous height
+    
+    // And we draw this one the same was as well
+    std::cout << scaled_pent.draw(make_pair(123, 412), false) << std::endl;
+    
+    // ****************
+    // **** STACKS ****
+    // ****************
+    
     return 0; // return 0 because done.
 }
