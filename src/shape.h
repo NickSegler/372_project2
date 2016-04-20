@@ -14,9 +14,14 @@ using std::pair;
 using std::make_pair;
 #include <vector>
 using std::vector;
-#include <cmath>
 
 #include <iostream>
+
+// ***************************************************
+// **** HELPER FUNCTIONS INCLUDED FOR TESTING USE ****
+// ***************************************************
+pair<double, double> polygonPoint(double l, int n, int k);
+string psTo(double x, double y, int t);
 
 // Shape
 // Virtual class that all others are derived from
@@ -145,7 +150,7 @@ public:
         }
     }
     
-    virtual  string draw(const pair<double, double> & coord, bool to_file)
+    virtual string draw(const pair<double, double> & coord, bool to_file)
     {
         return bShapeP_->draw(coord, to_file);
     }
@@ -161,7 +166,7 @@ public:
     R_shape(B_shape * bsp, double angle):Mod_shape(bsp), angle_(angle)
     {}
     
-    virtual  string draw(const pair<double, double> & coord, bool to_file)
+    virtual string draw(const pair<double, double> & coord, bool to_file)
     {
         string outStr = bShapeP_->draw(coord, to_file);
         
@@ -182,7 +187,7 @@ protected:
 
 // Triangle
 // Derived from B_shape
-// default is equalateral Triangle (same as Polygon(3))
+// Equalateral Triangle (same as Polygon(3))
 //
 //    **INVARIANTS**
 //      height_ and width_ >= 0
@@ -191,19 +196,15 @@ protected:
 class E_triangle : public B_shape{
 public:
     E_triangle(int x, int y);
-    
-    // draw
-    // takes point for center
-    // bool decides if postscript code get written or returned
     virtual string draw(const pair<double, double> & coord, bool to_file);
+
 protected:
     bounding_box b_box;
-    double height_;
-    double width_;
+    Polygon me;
 };
 
 // R_triangle
-// A right triangle derived from Triangle
+// A right triangle derived from B_shape
 // assumes bottom left is 90 degree angle
 // ex: __
 //    |\ |
