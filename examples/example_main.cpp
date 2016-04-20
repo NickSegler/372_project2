@@ -143,5 +143,65 @@ int main(){
     // **** STACKS ****
     // ****************
     
+    // Must first create B_Shape objects to pass to the stack.
+    Rectangle   rect(40,40);
+    Circle      circ(30);
+    Polygon     polyStack(20,8);
+
+    // Create either a horizontal stack object (H_stack)
+    H_stack example1;
+    H_stack example2;
+
+    // Or a vertical stack object (V_stack)
+    V_stack example3;
+    V_stack example4;
+
+    // Then, add the shapes to a vector in V_stack/H_stack 
+    // in the order you want them stacked.
+    // First in V_stack = top most
+    // First in H_stack = left most
+
+    // All shapes will be aligned on the stack based on their center point
+    // EXAMPLES:
+
+    // H_stack of Rectangles
+    example1.addShape(&rect);
+    example1.addShape(&rect);
+    example1.addShape(&rect);
+    example1.addShape(&rect);
+    example1.addShape(&rect);
+
+    example1.draw(make_pair(100,700), true);
+
+    // H_stack of mixed
+    example2.addShape(&rect);
+    example2.addShape(&circ);
+    example2.addShape(&rect);
+    example2.addShape(&circ);
+    example2.addShape(&rect);
+    example2.addShape(&circ);
+
+    example2.draw(make_pair(200,700), false);
+
+    // V_stack of circles
+    example3.addShape(&circ);
+    example3.addShape(&circ);
+    example3.addShape(&circ);
+    example3.addShape(&circ);
+    example3.addShape(&circ);
+
+    example3.draw(make_pair(300, 200), true);
+
+    // V_stack of mixed
+    example4.addShape(&circ);
+    example4.addShape(&rect);
+    example4.addShape(&circ);
+    example4.addShape(&rect);
+    example4.addShape(&circ);
+    example4.addShape(&rect);
+
+    example4.draw(make_pair(300, 200), true);
+
+
     return 0; // return 0 because done.
 }
