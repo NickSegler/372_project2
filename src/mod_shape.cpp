@@ -15,7 +15,7 @@ using std::pair;
 
 // Mod_shape
 Mod_shape::Mod_shape(B_shape * bsp){
-    bShapeP_=bsp;
+    bShapeP_=std::make_shared<B_shape>(*bsp);
 }
 
 // S_shape (scaling)
@@ -47,13 +47,24 @@ string S_shape::draw(const pair<double, double> & coord, bool to_file){
 }
 
 string R_shape::draw(const pair<double, double> & coord, bool to_file){
-    string outStr = bShapeP_->draw(coord, to_file);
+    string outStr = bShapeP_->draw(coord, false);
     
-    string add = std::to_string(angle_) + " rotate \n";
+    string add = std::to_string(angle_) + " rotate\n";
     
-    int rLoc = outStr.find("translate \n") + 11; //12 is the size of the searched string
+    int rLoc = outStr.find(" translate\n") + 11; //12 is the size of the searched string
     
     outStr.insert(rLoc, add);
     
-    return outStr;
+    if(!to_file)
+        return outStr;
+    else{
+        ofstream write("yourprogram.ps");
+        if(!write)
+        throw runtime_error("invalid filename");
+        
+        write << outStr;
+        
+        write.close();
+        return "";
+    }
 }

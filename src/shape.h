@@ -14,6 +14,7 @@ using std::pair;
 using std::make_pair;
 #include <vector>
 using std::vector;
+#include <memory> // for shared_ptr
 
 #include <iostream>
 
@@ -133,12 +134,8 @@ protected:
 class Mod_shape : public Shape{
 public:
     Mod_shape(B_shape * bsp);
-    
-    ~Mod_shape(){
-        delete bShapeP_;
-    }
 protected:
-    B_shape * bShapeP_;
+    std::shared_ptr<B_shape> bShapeP_;
 };
 
 class S_shape : public Mod_shape{

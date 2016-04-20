@@ -108,9 +108,9 @@ int main(){
     
     // 2 Parameter Constructor
      
-    R_shape rotated_pent(pent, 73.3);
+    R_shape rotated_pent(&pent, 73.3);
     
-    // The first parameter is the B_shape we want to rotate
+    // The first parameter is the address B_shape we want to rotate
     // The second parameter is the angle of rotation
     // it rotates around the center of the bounding box
     
