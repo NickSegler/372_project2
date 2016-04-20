@@ -92,13 +92,6 @@ Polygon::Polygon(double w, double h, int n):numberSides_(n){
     makeVList();
 }
 
-void Polygon::scale(double x, double y){
-    for(int i=0; i<verts.size(); ++i)
-    {
-        verts[i].first = verts[i].first*x;
-        verts[i].second = verts[i].second*y;
-    }
-}
 //uses the inradius to find sidelength
 double Polygon::sideL(double r, int sides)
 {

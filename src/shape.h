@@ -110,8 +110,6 @@ public:
     // n is number of sides
     Polygon(double w, double h, int n);
     
-    void scale(double x, double y);
-    
     void makeBBox();
     void makeVList();
     double sideL(double r, int sides);
