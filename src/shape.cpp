@@ -148,9 +148,19 @@ void Polygon::makeVList()
 
 // Triangles
 //     E_triangle
-E_triangle::E_triangle(int x, int y){
-    double sidelen = std::sqrt((y * y) + ((.5 * x) * (.5 * x)));
+E_triangle::E_triangle(double w, double h){
+    double sidelen = std::sqrt((h * h) + ((.5 * w) * (.5 * w)));
     me = Polygon(sidelen, 3);
+}
+//    R_triangle
+R_triangle::R_triangle(double w, double h){
+   b_box.bright = make_pair(w, 0);
+   b_box.tright = make_pair(w, h); 
+   b_box.tleft  = make_pair(0, h);
+
+   verts.push_back(make_pair(0,0));
+   verts.push_back(make_pair(0,h));
+   verts.push_back(make_pair(w,0));
 }
 
 // ************************
@@ -209,8 +219,6 @@ string Circle::draw(const pair<double, double> & coord, bool to_file)
     outStr += "closepath \n";
     outStr += "stroke\n";
     outStr += "grestore\n";
-    
-    
     
     return outStr;
 }

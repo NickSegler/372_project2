@@ -34,6 +34,8 @@ TEST_CASE("Testing B_Shapes"){
 
             REQUIRE(test.draw(point, false) == check.draw(point, false));
         }
+        SECTION("Testing R_triangle (right triangle)"){
+        }
     }
     SECTION("Testing Polygon"){
         vector<Polygon> tests;

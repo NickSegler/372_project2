@@ -51,10 +51,9 @@ public:
     // bool decides if postscript code get written or returned
     virtual string draw(const pair<double, double> & coord, bool to_file);
     
-    vector<pair<double,double>> verts;
+    vector<pair<double,double>> verts; // this should probably be protected, but friends are hard.
     
 protected:
-    
     struct bounding_box{
         pair<double, double> bright;
         pair<double, double> tright;
@@ -99,8 +98,15 @@ class Polygon : public B_shape{
 public:
     Polygon();
     
-    Polygon(double l, int n);
+    // 2 param ctor
+    // l is side lenght
+    // n is number of sides
+    Polygon(double l, int n); 
     
+    // 3 param ctor
+    // w is width of bounding box
+    // h is height of bounding box
+    // n is number of sides
     Polygon(double w, double h, int n);
     
     void scale(double x, double y);
@@ -195,11 +201,9 @@ protected:
 //      b_box.x == width
 class E_triangle : public B_shape{
 public:
-    E_triangle(int x, int y);
+    E_triangle(double w, double h);
     virtual string draw(const pair<double, double> & coord, bool to_file);
-
 protected:
-    bounding_box b_box;
     Polygon me;
 };
 
@@ -212,16 +216,16 @@ protected:
 //
 class R_triangle : public B_shape{
 public:
-    R_triangle(int x, int y);
+    // two param ctor
+    //     w is width (bottom side)
+    //     h is height (right side)
+    R_triangle(double w, double h);
     
     // draw
     // takes point for center
     // bool decides if postscript code get written or returned
-    string draw(const pair<double, double> & coord, bool to_file);
 protected:
     bounding_box b_box;
-    double height_;
-    double width_;
 };
 
 
