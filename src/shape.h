@@ -226,6 +226,12 @@ public:
     void addShape(B_shape * bsp)
     {  theStack.push_back(bsp);    }
 
+    pair<double,double> findGreatest(B_shape * bsp);
+
+    double findHeight(B_shape *bsp);
+
+    double findWidth(B_shape *bsp);
+
 protected:
     vector <B_shape*> theStack;
 };
@@ -245,12 +251,6 @@ class V_stack : public Stack {
 public:
 
     string draw(const pair<double, double> & coord, bool to_file);
-
-    pair<double,double> findGreatest(B_shape * bsp);
-
-    double findHeight(B_shape *bsp);
-
-    double findWidth(B_shape *bsp);
 
 protected:
     double center;
