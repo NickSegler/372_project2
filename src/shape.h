@@ -132,6 +132,8 @@ protected:
 class Mod_shape : public Shape{
 public:
     Mod_shape(B_shape * bsp);
+    
+    Mod_shape(Mod_shape * msp);
 protected:
     std::shared_ptr<B_shape> bShapeP_;
 };
@@ -153,6 +155,8 @@ protected:
 class R_shape : public Mod_shape{
 public:
     R_shape(B_shape * bsp, double angle);
+    
+    R_shape(Mod_shape * msp, double angle);
     
     virtual string draw(const pair<double, double> & coord, bool to_file);
 

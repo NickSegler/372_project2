@@ -108,7 +108,7 @@ int main(){
     
     // 2 Parameter Constructor
      
-    R_shape rotated_pent(&pent, 73.3);
+    R_shape rotated_pent(&pent, 180.0);
     
     // The first parameter is the address B_shape we want to rotate
     // The second parameter is the angle of rotation
@@ -126,11 +126,18 @@ int main(){
     // the following two are the scale for X and Y respectively
     S_shape scaled_pent(&pent, 1, 3);
     
+    
     // This makes a scaled shape that is 1 * the previous width of pent
     // and 3 * the previous height
     
     // And we draw this one the same was as well
     std::cout << scaled_pent.draw(make_pair(123, 412), false) << std::endl;
+    
+    //rotating and scaling can be dont together
+    //first scale the object then pass the S_shape object to the R_shape with an angle
+    R_shape scaRotPen(&scaled_pent, 25);
+    
+    std::cout << scaRotPen.draw(make_pair(123, 412), false) <<std::endl;
     
     // ****************
     // **** STACKS ****

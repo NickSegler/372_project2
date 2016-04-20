@@ -18,6 +18,11 @@ Mod_shape::Mod_shape(B_shape * bsp){
     bShapeP_=std::make_shared<B_shape>(*bsp);
 }
 
+Mod_shape::Mod_shape(Mod_shape * msp)
+{
+    bShapeP_=std::make_shared<B_shape>(*msp->bShapeP_);
+}
+
 // S_shape (scaling)
 S_shape::S_shape(B_shape * bsp, double x, double y):Mod_shape(bsp){
     scaleX_ = x;
@@ -36,6 +41,10 @@ void S_shape::scale(){
 // R_shape (rotation)
 R_shape::R_shape(B_shape * bsp, double angle):Mod_shape(bsp){
     angle_ = angle;
+}
+
+R_shape::R_shape(Mod_shape * msp, double angle):Mod_shape(msp){
+    angle_=angle;
 }
 
 // ************************
