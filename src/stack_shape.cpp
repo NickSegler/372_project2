@@ -15,7 +15,7 @@ using std::pair;
 // ****     STACK      ****
 // ************************
 
-string H_stack::draw(const pair<double, double> & coord, bool to_file)
+string V_stack::draw(const pair<double, double> & coord, bool to_file)
 {
     string output;
     pair<double,double> start = coord;
@@ -118,21 +118,20 @@ string H_stack::draw(const pair<double, double> & coord, bool to_file)
     }
 
     if(!to_file)
-    {   return output;   }
-
-    else
-    {
+        return output;
+    else{
         ofstream write("yourprogram.ps");
         if(!write)
         throw runtime_error("invalid filename");
-    
+        
         write << output;
-    
+        
         write.close();
+        return "";
     }
 }
 
-string V_stack::draw(const pair<double, double> & coord, bool to_file)
+string H_stack::draw(const pair<double, double> & coord, bool to_file)
 {   
     string output;
     pair<double,double> start = coord;
@@ -207,17 +206,17 @@ string V_stack::draw(const pair<double, double> & coord, bool to_file)
     }
 
     if(!to_file)
-    {   return output;   }
-
+        return output;
     else
     {
         ofstream write("yourprogram.ps");
         if(!write)
         throw runtime_error("invalid filename");
-    
+        
         write << output;
-    
+        
         write.close();
+        return "";
     }
 }
 
