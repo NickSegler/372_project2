@@ -71,7 +71,20 @@ string H_stack::draw(const pair<double, double> & coord, bool to_file)
             start.first =  baseline - (width/2);    // x_coord
             output += (theStack[i]->draw(start,false));
 
-            start = make_pair(baseline, start.second);
+            if(i < theStack.size()-1)
+            {   
+                if(theStack[i+1]->verts.size() == 4)
+                {
+                    double height = findHeight(theStack[i+1]);
+                    start = make_pair(baseline, start.second - height);  
+                }
+
+                else
+                { start = make_pair(baseline, start.second);}
+            }
+            else
+            {   start = make_pair(baseline, start.second);}
+            
         }
 
         // Polygons, start from center
@@ -105,7 +118,7 @@ string H_stack::draw(const pair<double, double> & coord, bool to_file)
     }
 
     if(!to_file)
-    {   std::cout << output << std::endl;   }
+    {   return output;   }
 
     else
     {
@@ -194,7 +207,7 @@ string V_stack::draw(const pair<double, double> & coord, bool to_file)
     }
 
     if(!to_file)
-    {   std::cout << output << std::endl;   }
+    {   return output;   }
 
     else
     {
