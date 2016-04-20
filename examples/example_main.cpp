@@ -90,7 +90,37 @@ int main(){
     // ****************
     // **** CIRCLE ****
     // ****************
-
+    
+    // 1 Parameter Constructor
+    Circle circe(100);
+    // This makes a cirlce with a radius of 100
+    // We can get the postscript code the same way as before
+    
+    std::cout << circe.draw(make_pair(100,232), false) << std::endl;
+    
+    // *************************
+    // **** MODIFIED SHAPES ****
+    // *************************
+    
+    // Rotating shapes
+    // To rotate a shape, we first need a shape to rotate
+    // for this example, we'll use pent from before
+    
+    // 2 Parameter Constructor
+     
+    R_shape rotated_pent(pent, 73.3);
+    
+    // The first parameter is the B_shape we want to rotate
+    // The second parameter is the angle of rotation
+    // it rotates around the center of the bounding box
+    
+    // We can draw it the same way as everything else
+    std::cout << rotated_pent.draw(make_pair(123, 412), false) << std::endl;
+    rotated_pent.draw(make_pair(123, 412), true);
+    
+    // Scaling shapes
+    // We follow a similar procedure as rotating a shape to scale a shape
+    // 
 
 
     return 0; // return 0 because done.

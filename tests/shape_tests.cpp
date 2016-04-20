@@ -35,6 +35,12 @@ TEST_CASE("Testing B_Shapes"){
             REQUIRE(test.draw(point, false) == check.draw(point, false));
         }
         SECTION("Testing R_triangle (right triangle)"){
+            pair<double, double> point = make_pair(30, 40);
+            string output = "% !\n0 0\nnewpath\ngsave\n300.000000 200.000000 translate\n0.000000 0.000000 moveto\n0.000000 42.210000 lineto\n300.000000 0.000000 lineto\nclosepath\nstroke\ngrestore\n";
+            
+            R_triangle test(300, 42.21);
+            
+            REQUIRE(test.draw(make_pair(300, 200), false) == output);
         }
     }
     SECTION("Testing Polygon"){
@@ -54,5 +60,19 @@ TEST_CASE("Testing B_Shapes"){
             REQUIRE(tests[i].draw(make_pair(200,300),false) == output);
         }
     }
-
 }// END TEST CASE B_SHAPES
+
+TEST_CASE("Testing Modified Shapes"){
+    SECTION("Testing R_shape (rotation)"){
+        
+    }
+}// END TEST CASE M_SHAPES
+
+TEST_CASE("Testing Stacks"){
+    SECTION("Testing V_stack"){
+        
+    }
+    SECTION("Testing H_stack"){
+        
+    }
+}// END TEST CASE STACKS

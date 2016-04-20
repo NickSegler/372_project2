@@ -132,9 +132,10 @@ protected:
 
 class Mod_shape : public Shape{
 public:
-    Mod_shape(B_shape * bsp):bShapeP_(bsp)
-    {
-        bShapeP_=bsp;
+    Mod_shape(B_shape * bsp);
+    
+    ~Mod_shape(){
+        delete bShapeP_;
     }
 protected:
     B_shape * bShapeP_;
@@ -142,24 +143,11 @@ protected:
 
 class S_shape : public Mod_shape{
 public:
-    S_shape(B_shape * bsp, double x, double y):Mod_shape(bsp),scaleX_(x),scaleY_(y)
-    {
-        scale();
-    }
+    S_shape(B_shape * bsp, double x, double y);
     
-    void scale()
-    {
-        for(int i=0; i<bShapeP_->verts.size();++i)
-        {
-            bShapeP_->verts[i].first*=scaleX_;
-            bShapeP_->verts[i].second*=scaleY_;
-        }
-    }
+    void scale();
     
-    virtual string draw(const pair<double, double> & coord, bool to_file)
-    {
-        return bShapeP_->draw(coord, to_file);
-    }
+    virtual string draw(const pair<double, double> & coord, bool to_file);
     
 protected:
     double scaleX_;
@@ -169,21 +157,9 @@ protected:
 
 class R_shape : public Mod_shape{
 public:
-    R_shape(B_shape * bsp, double angle):Mod_shape(bsp), angle_(angle)
-    {}
+    R_shape(B_shape * bsp, double angle);
     
-    virtual string draw(const pair<double, double> & coord, bool to_file)
-    {
-        string outStr = bShapeP_->draw(coord, to_file);
-        
-        string add = std::to_string(angle_) + " rotate \n";
-        
-        int rLoc = outStr.find("translate \n") + 11; //12 is the size of the searched string
-        
-        outStr.insert(rLoc, add);
-        
-        return outStr;
-    }
+    virtual string draw(const pair<double, double> & coord, bool to_file);
 
     
 protected:
